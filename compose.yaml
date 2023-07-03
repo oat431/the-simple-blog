@@ -1,9 +1,32 @@
+version: "3.8"
 services:
-  postgres:
-    image: 'postgres:latest'
+  db:
+    container_name: db_container
+    image: postgres
     environment:
-      - 'POSTGRES_DB=blog_db'
-      - 'POSTGRES_PASSWORD=password'
-      - 'POSTGRES_USER=root'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     ports:
-      - '5432'
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+  
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: oat431@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "6000:80"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+volumes:
+  db:
+    driver: local
+  
+  pgadmin:
+    driver: local
