@@ -31,13 +31,13 @@ public class BlogController {
     ) {
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         Page<Blog> result = blogService.getAllBlogs(pageRequest);
-        PageBlogDto response = PageBlogDto.builder()
-                .page(page)
-                .size(size)
-                .totalElements(result.getTotalElements())
-                .totalPages(result.getTotalPages())
-                .blogs(DtoMapper.INSTANCE.toBlogDto(result.getContent()))
-                .build();
+        PageBlogDto response = new PageBlogDto(
+                page,
+                size,
+                result.getTotalPages(),
+                result.getTotalElements(),
+                DtoMapper.INSTANCE.toBlogDto(result.getContent())
+        );
         return new ResponseEntity<>(
                 response,
                 HttpStatus.OK

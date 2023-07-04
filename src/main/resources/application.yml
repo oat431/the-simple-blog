@@ -30,3 +30,7 @@ springdoc:
     try-it-out-enabled: true
     tags-sorter: alpha
     filter: true
+
+# secondary server port
+server:
+  port: 5000
