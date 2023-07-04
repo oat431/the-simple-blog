@@ -65,4 +65,29 @@ public class BlogController {
                 HttpStatus.CREATED
         );
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "update a blog")
+    public ResponseEntity<BlogDto> updateBlog(
+            @PathVariable("id") String id,
+            @RequestBody BlogRequest request
+    ) {
+        return new ResponseEntity<>(
+                DtoMapper.INSTANCE.toBlogDto(blogService.updateBlog(id, request)),
+                HttpStatus.OK
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "delete a blog")
+    public ResponseEntity<BlogDto> deleteBlog(
+            @PathVariable("id") String id
+    ) {
+        BlogDto result = DtoMapper.INSTANCE.toBlogDto(blogService.getBlogById(id));
+        blogService.deleteBlog(id);
+        return new ResponseEntity<>(
+                result,
+                HttpStatus.OK
+        );
+    }
 }

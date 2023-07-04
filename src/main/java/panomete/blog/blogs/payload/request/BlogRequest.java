@@ -1,3 +1,5 @@
 package panomete.blog.blogs.payload.request;
 
-public record BlogRequest(String title, String content, String author) { }
+import java.util.List;
+
+public record BlogRequest(String title, String content, String author, List<String> tags) { }
