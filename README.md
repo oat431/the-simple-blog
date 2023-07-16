@@ -14,3 +14,7 @@ Just to learn how to do a proper api. will keep updating if there to be update
 - [ ] adding automatic deployment
 - [ ] adding unit tests
 - [ ] adding integration tests
+
+# to make it more efficient
+- [ ] remove lombok
+- [ ] add logging framework
