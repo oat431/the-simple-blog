@@ -8,7 +8,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
     properties:
@@ -32,5 +32,5 @@ springdoc:
     filter: true
 
 # secondary server port
-server:
-  port: 5000
+#server:
+#  port: 5000

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import panomete.blog.blogs.entity.Blog;
 import panomete.blog.blogs.payload.request.BlogRequest;
 import panomete.blog.blogs.payload.response.BlogDto;
-import panomete.blog.blogs.payload.response.PageBlogDto;
 import panomete.blog.blogs.service.BlogService;
+import panomete.blog.common.PageDto;
 import panomete.blog.utils.DtoMapper;
 
 @Controller
@@ -25,15 +25,15 @@ public class BlogController {
 
     @GetMapping("/")
     @Operation(summary = "get all the blogs as pagination")
-    public ResponseEntity<PageBlogDto> getBlogsAsPagination(
+    public ResponseEntity<PageDto<BlogDto>> getBlogsAsPagination(
             @RequestParam(value = "page", defaultValue = "1", required = false) int page,
             @RequestParam(value = "size", defaultValue = "10", required = false) int size
     ) {
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         Page<Blog> result = blogService.getAllBlogs(pageRequest);
-        PageBlogDto response = new PageBlogDto(
-                page,
-                size,
+        PageDto<BlogDto> response = new PageDto<>(
+                result.getNumber() + 1,
+                result.getSize(),
                 result.getTotalPages(),
                 result.getTotalElements(),
                 DtoMapper.INSTANCE.toBlogDto(result.getContent())

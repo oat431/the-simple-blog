@@ -41,7 +41,7 @@ public class Blog {
     @LastModifiedDate
     Date updatedAt;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
     @Builder.Default
     List<Tags> tags = new ArrayList<>();
 }

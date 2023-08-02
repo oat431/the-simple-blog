@@ -28,7 +28,7 @@ public class Tags {
     @CreatedDate
     Date createdAt;
 
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     List<Blog> blog;
 
 }
