@@ -1,5 +1,5 @@
 # Simple Blogs System
-Just to learn how to do a proper api.
+Just to learn how to do a proper api. will keep updating if there to be update
 - [x] Setup a basic blog api
 - [ ] implementing tags feature
 - [ ] implementing blogs searching
@@ -14,3 +14,7 @@ Just to learn how to do a proper api.
 - [ ] adding automatic deployment
 - [ ] adding unit tests
 - [ ] adding integration tests
+
+# to make it more efficient
+- [ ] remove lombok
+- [ ] add logging framework
