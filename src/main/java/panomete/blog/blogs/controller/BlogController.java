@@ -3,13 +3,12 @@ package panomete.blog.blogs.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import panomete.blog.blogs.entity.Blog;
+import panomete.blog.blogs.helper.BlogsHelper;
 import panomete.blog.blogs.payload.request.BlogRequest;
 import panomete.blog.blogs.payload.response.BlogDto;
 import panomete.blog.blogs.service.BlogService;
@@ -22,6 +21,7 @@ import panomete.blog.utils.DtoMapper;
 @RequiredArgsConstructor
 public class BlogController {
     final BlogService blogService;
+    final BlogsHelper blogsHelper;
 
     @GetMapping("/")
     @Operation(summary = "get all the blogs as pagination")
@@ -30,29 +30,14 @@ public class BlogController {
             @RequestParam(value = "size", defaultValue = "10", required = false) int size
     ) {
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<Blog> result = blogService.getAllBlogs(pageRequest);
-        PageDto<BlogDto> response = new PageDto<>(
-                result.getNumber() + 1,
-                result.getSize(),
-                result.getTotalPages(),
-                result.getTotalElements(),
-                DtoMapper.INSTANCE.toBlogDto(result.getContent())
-        );
-        return new ResponseEntity<>(
-                response,
-                HttpStatus.OK
-        );
+        PageDto<BlogDto> response = blogsHelper.convertToPageDto(blogService.getAllBlogs(pageRequest));
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "get a blog by id")
-    public ResponseEntity<BlogDto> getBlogByUUID(
-            @PathVariable("id") String id
-    ) {
-        return new ResponseEntity<>(
-                DtoMapper.INSTANCE.toBlogDto(blogService.getBlogById(id)),
-                HttpStatus.OK
-        );
+    public ResponseEntity<BlogDto> getBlogByUUID(@PathVariable("id") String id) {
+        return blogsHelper.showResponse(blogService.getBlogById(id));
     }
 
     @PostMapping("/")
