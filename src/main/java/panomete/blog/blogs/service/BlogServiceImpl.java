@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import panomete.blog.blogs.dao.BlogDao;
 import panomete.blog.blogs.entity.Blog;
 import panomete.blog.blogs.payload.request.BlogRequest;
+import panomete.blog.blogs.payload.response.BlogDto;
 import panomete.blog.tags.dao.TagDao;
 import panomete.blog.tags.entity.Tags;
 
@@ -23,6 +24,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Page<Blog> getAllBlogs(PageRequest pageRequest) {
         return blogDao.getBlogs(pageRequest);
+    }
+
+    @Override
+    public Page<BlogDto> getOnlyHorrorBlogs(PageRequest pageRequest) {
+        return blogDao.fetchOnlyHorror(pageRequest);
     }
 
     @Override

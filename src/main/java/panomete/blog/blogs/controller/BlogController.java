@@ -34,6 +34,18 @@ public class BlogController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/horror")
+    @Operation(summary = "get all the blogs as pagination")
+    public ResponseEntity<PageDto<BlogDto>> getHorrorBlogsAsPagination(
+            @RequestParam(value = "page", defaultValue = "1", required = false) int page,
+            @RequestParam(value = "size", defaultValue = "10", required = false) int size
+    ) {
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
+        PageDto<BlogDto> response = blogsHelper.convertDtoToPageDto(blogService.getOnlyHorrorBlogs(pageRequest));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
     @GetMapping("/{id}")
     @Operation(summary = "get a blog by id")
     public ResponseEntity<BlogDto> getBlogByUUID(@PathVariable("id") String id) {

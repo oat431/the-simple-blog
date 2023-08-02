@@ -25,6 +25,21 @@ public class BlogsHelper implements BaseHelper<BlogDto,Blog> {
         );
     }
 
+    @Override
+    public PageDto<BlogDto> convertDtoToPageDto(Page<BlogDto> result) {
+        return new PageDto<>(
+                result.getNumber() + 1,
+                result.getSize(),
+                result.getTotalPages(),
+                result.getTotalElements(),
+                result.hasNext(),
+                result.hasPrevious(),
+                result.isFirst(),
+                result.isLast(),
+                result.getContent()
+        );
+    }
+
     public ResponseEntity<BlogDto> showResponse(Blog result) {
         if(result == null) {
             return ResponseEntity.notFound().build();

@@ -6,5 +6,6 @@ import panomete.blog.common.PageDto;
 
 public interface BaseHelper<T,G> {
     PageDto<T> convertToPageDto(Page<G> result);
+    PageDto<T> convertDtoToPageDto(Page<T> result);
     ResponseEntity<T> showResponse(G result);
 }
