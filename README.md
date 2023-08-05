@@ -1,7 +1,7 @@
 # Simple Blogs System
 Just to learn how to do a proper api. will keep updating if there to be update
 - [x] Setup a basic blog api
-- [ ] implementing tags feature
+- [x] implementing tags feature
 - [ ] implementing blogs searching (in progress)
   - [ ] by title
   - [ ] by tags
