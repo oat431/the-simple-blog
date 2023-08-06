@@ -14,3 +14,7 @@ Just to learn how to do a proper api. will keep updating if there to be update
 - [ ] adding automatic deployment
 - [ ] adding unit tests
 - [ ] adding integration tests
+
+# to enhance this app
+- implement text search using text db like solr or elasticseach
+- adding spb actuator
